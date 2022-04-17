@@ -1,0 +1,12 @@
+.Card{
+  flex: 1
+}
+
+.Card:hover{
+  cursor: pointer;
+}
+
+.Card img{
+  width: 140px;
+  height: 140px;
+}
