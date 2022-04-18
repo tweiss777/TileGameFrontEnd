@@ -15,7 +15,7 @@ const Board = (props) => {
       setCompleted([...completed, newCheckers[0].type]);
     }
     if (checkersFull(newCheckers)) {
-      resetCheckersAfter(1000);
+      resetCheckersAfter(500);
     }
     function validateCheckers(checkers) {
       return checkers.length === 2 && checkers[0].type === checkers[1].type;
@@ -47,6 +47,7 @@ const Board = (props) => {
       {cards.map((card) => (
         <Card {...card} onClick={onCardClick(card)} key={card.id} />
       ))}
+      {completed.length === 8 && <h1>You Won!</h1>}
     </div>
   );
 };

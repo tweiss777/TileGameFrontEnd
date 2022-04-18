@@ -1,8 +1,10 @@
+import { React, useState } from "react";
 import Board from "../components/Board/Board";
-import backImg from "../images/back.png";
-import angular from "../images/angular.png";
+import backImg from "../images/itc.png";
+import Timer from "../components/Timer";
+import angular from "../images/mysql.png";
 import css from "../images/css.png";
-import itc from "../images/itc.png";
+import itc from "../images/mongodb.png";
 import html from "../images/html.png";
 import rail from "../images/node_js.png";
 import react from "../images/react.png";
@@ -10,10 +12,27 @@ import scala from "../images/js.png";
 import vue from "../images/vue.png";
 
 const Home = () => {
+  const [timesOver, setTimesOver] = useState(false);
   const cards = buildCards();
   return (
     <div className="App">
-      <Board cards={cards} />
+      <div className="timer">
+        {!timesOver && <Timer setTimesOver={setTimesOver} />}
+      </div>
+      <div>
+        {timesOver ? (
+          <div>
+            <div className="gameOver">Game Over!!</div>
+            <div
+              className="tryAgain"
+              onClick={() => window.location.reload(false)}>
+              Try again
+            </div>
+          </div>
+        ) : (
+          <Board cards={cards} />
+        )}
+      </div>
     </div>
   );
 };
