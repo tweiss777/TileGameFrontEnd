@@ -11,14 +11,14 @@ const Timer = ({ setTimesOver }) => {
     } else {
       return (
         <span>
-          {minutes}:{seconds}
+          Time left: {minutes}:{seconds}
         </span>
       );
     }
   };
   return (
     <div>
-      <Countdown date={Date.now() + 10000} renderer={renderer}></Countdown>
+      <Countdown date={Date.now() + 50000} renderer={renderer}></Countdown>
     </div>
   );
 };
