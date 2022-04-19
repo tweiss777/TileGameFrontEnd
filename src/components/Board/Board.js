@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import "./Board.css";
 
-const Board = (props) => {
-  const [cards, setCards] = useState(props.cards);
+const Board = ({ cartas, completed, setCompleted }) => {
+  const [cards, setCards] = useState(cartas);
   const [checkers, setCheckers] = useState([]);
-  const [completed, setCompleted] = useState([]);
   const onCardClick = (card) => () => {
     if (checkersFull(checkers) || cardAlreadyInCheckers(checkers, card)) return;
     const newCheckers = [...checkers, card];
@@ -15,7 +14,7 @@ const Board = (props) => {
       setCompleted([...completed, newCheckers[0].type]);
     }
     if (checkersFull(newCheckers)) {
-      resetCheckersAfter(1000);
+      resetCheckersAfter(600);
     }
     function validateCheckers(checkers) {
       return checkers.length === 2 && checkers[0].type === checkers[1].type;

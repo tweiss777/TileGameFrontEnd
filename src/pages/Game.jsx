@@ -1,28 +1,67 @@
+import { React, useState } from "react";
 import Board from "../components/Board/Board";
-import backImg from "../images/back.png";
+import Timer from "../components/Timer";
+import backImg from "../images/itc.png";
 import angular from "../images/angular.png";
 import css from "../images/css.png";
-import itc from "../images/itc.png";
+import mongo from "../images/mongodb.png";
 import html from "../images/html.png";
-import rail from "../images/node_js.png";
+import node from "../images/node_js.png";
 import react from "../images/react.png";
-import scala from "../images/js.png";
-import vue from "../images/vue.png";
+import js from "../images/js.png";
+import mysql from "../images/mysql.png";
+import sad from "../images/sad.png";
 
 const Home = () => {
+  const [timesOver, setTimesOver] = useState(false);
+  const [completed, setCompleted] = useState([]);
+
   const cards = buildCards();
   return (
     <div className="App">
-      <Board cards={cards} />
+      <div className="timer">
+        {!timesOver && completed.length < 8 ? (
+          <Timer setTimesOver={setTimesOver} />
+        ) : completed.length === 8 ? (
+          <div>
+            <span className="win">You Won!! </span>
+            <span
+              className="tryAgain"
+              onClick={() => window.location.reload(false)}>
+              Play again?
+            </span>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      <div>
+        {timesOver ? (
+          <div>
+            <div className="gameOver">You Lost!!</div>
+            <img className="sad" src={sad} alt=":(" />
+            <div
+              className="tryAgain"
+              onClick={() => window.location.reload(false)}>
+              Try again
+            </div>
+          </div>
+        ) : (
+          <Board
+            cartas={cards}
+            completed={completed}
+            setCompleted={setCompleted}
+          />
+        )}
+      </div>
     </div>
   );
 };
-
 export default Home;
 
 function buildCards() {
   let id = 0;
-  const images = { angular, css, itc, html, rail, react, scala, vue };
+  const images = { angular, css, mongo, html, node, react, js, mysql };
   const cards = Object.keys(images).reduce((result, item) => {
     const getCard = () => ({
       id: id++,

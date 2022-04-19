@@ -1,4 +1,39 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+h1 {
+  margin: 6rem;
+}
+.timer {
+  height: 40px;
+  width: 70%;
+  font-size: 28px;
+  margin-top: 1rem;
+}
+.gameOver {
+  font-size: 5rem;
+  color: red;
+}
+.Card {
+  border: 1px solid rgb(172, 160, 160);
+  border-radius: 1%;
+  margin: 6px;
+}
+.tryAgain {
+  margin-top: 2rem;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.win {
+  font-weight: 800;
+  margin-bottom:1rem;
+  
+}
+.sad {
+  height:26rem;
+  width: 22rem;
+}
