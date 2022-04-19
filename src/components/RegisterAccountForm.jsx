@@ -37,10 +37,12 @@ export default function RegisterAccountForm({handleClose}){
 
     function createAccount(){
         setHasErrors(false)
+        // any client side errors
         if(!userName || !firstName || !lastName || !password){
             setHasErrors(true)
             return
         }
+
 
     }
 
