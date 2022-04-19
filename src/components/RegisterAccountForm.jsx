@@ -59,7 +59,7 @@ export default function RegisterAccountForm({handleClose}){
                     <input onChange={fieldOnChange} id='last-name' type='text' placeholder="last name" />
                     <label>Password</label>
                     <input onChange={fieldOnChange} id='password' type='password' placeholder="password" />
-                    <button onClick={createAccount}>Create Account</button>
+                    <button className="submit-btn" onClick={createAccount}>Create Account</button>
                 </div>
 
 

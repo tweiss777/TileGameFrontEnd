@@ -36,6 +36,16 @@
 }
 
 
+.form-container .submit-btn{
+    margin: 10px auto;
+    width: 50%;
+    font-size: 0.8rem;
+    background-color: #03dddd;
+    border-radius: 10px;
+
+}
+
+
 .close-icon{
     color: #000000;
     cursor: pointer;
@@ -57,4 +67,6 @@
     color: #FFFFFF;
     background-color: #000000;
 }
+
+
 
