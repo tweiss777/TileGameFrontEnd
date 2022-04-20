@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useAuthentiation } from "../hooks/useAuthentication";
 import '../styles/CreateAccount.css';
 
 
 export default function RegisterAccountForm({handleClose}){
 
+    const {createAccount} = useAuthentiation()
     const [userName,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('')
-
     const [hasErrors, setHasErrors] = useState(false);
 
     function closeForm(){
@@ -40,13 +41,14 @@ export default function RegisterAccountForm({handleClose}){
     }
 
 
-    function createAccount(){
+    function handleCreateAccount(){
         setHasErrors(false)
         // any client side errors
         if(!userName || !firstName || !lastName || !password){
             setHasErrors(true)
             return
         }
+        createAccount({email:userName,firstname:firstName,lastname:lastName,password:password,confirmPassword:confirmPassword})
 
 
     }
@@ -69,7 +71,7 @@ export default function RegisterAccountForm({handleClose}){
                     <input id='confirm-password' type='password' placeholder='password' onChange={fieldOnChange} />
 
                     <input onChange={fieldOnChange} id='password' type='password' placeholder="password" />
-                    <button className="submit-btn" onClick={createAccount}>Create Account</button>
+                    <button className="submit-btn" onClick={handleCreateAccount}>Create Account</button>
                 </div>
 
 

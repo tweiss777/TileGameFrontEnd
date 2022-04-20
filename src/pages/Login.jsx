@@ -1,22 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
+import { useAuthentiation } from "../hooks/useAuthentication";
 import "../styles/Login.css";
 export default function Login() {
-  const navigate = useNavigate();
+  const {login,errors} = useAuthentiation();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(false);
   const [showNewUserForm, setShowNewUserForm] = useState(false);
 
   function handleLogin() {
-    setErrors(false);
-    if (!username || !password) {
-      setErrors(true);
-      return;
-    }
-    // need to authenticate user before navigating to page
-    navigate("/home");
+    
+    login(username,password)
   }
 
   function onClickCreateAccountButton() {

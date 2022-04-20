@@ -9,14 +9,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <AuthenticationProvider>
+        <AuthenticationProvider>
+
+          <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/game" element={<Game />} />
             <Route path='/' element={<Login />} />
-          </AuthenticationProvider>
+          </Routes>
+        </AuthenticationProvider>
 
-        </Routes>
       </BrowserRouter>
     </div>
   );
