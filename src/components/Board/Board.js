@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import "./Board.css";
 
-const Board = ({ cartas, completed, setCompleted }) => {
+const Board = ({ cartas, scored, setScored }) => {
   const [cards, setCards] = useState(cartas);
   const [checkers, setCheckers] = useState([]);
   const onCardClick = (card) => () => {
@@ -11,7 +11,7 @@ const Board = ({ cartas, completed, setCompleted }) => {
     setCheckers(newCheckers);
     const cardsInCheckersMatched = validateCheckers(newCheckers);
     if (cardsInCheckersMatched) {
-      setCompleted([...completed, newCheckers[0].type]);
+      setScored([...scored, newCheckers[0].type]);
     }
     if (checkersFull(newCheckers)) {
       resetCheckersAfter(600);
@@ -36,10 +36,10 @@ const Board = ({ cartas, completed, setCompleted }) => {
     const newCards = cards.map((card) => ({
       ...card,
       flipped:
-        checkers.find((c) => c.id === card.id) || completed.includes(card.type),
+        checkers.find((c) => c.id === card.id) || scored.includes(card.type),
     }));
     setCards(newCards);
-  }, [checkers, completed, cards]);
+  }, [checkers, scored, cards]);
 
   return (
     <div className="Board">

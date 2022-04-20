@@ -14,15 +14,15 @@ import sad from "../images/sad.png";
 
 const Home = () => {
   const [timesOver, setTimesOver] = useState(false);
-  const [completed, setCompleted] = useState([]);
+  const [scored, setScored] = useState([]);
 
   const cards = buildCards();
   return (
     <div className="App">
       <div className="timer">
-        {!timesOver && completed.length < 8 ? (
+        {!timesOver && scored.length < 8 ? (
           <Timer setTimesOver={setTimesOver} />
-        ) : completed.length === 8 ? (
+        ) : scored.length === 8 ? (
           <div>
             <span className="win">You Won!! </span>
             <span
@@ -47,11 +47,7 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <Board
-            cartas={cards}
-            completed={completed}
-            setCompleted={setCompleted}
-          />
+          <Board cartas={cards} scored={scored} setScored={setScored} />
         )}
       </div>
     </div>
