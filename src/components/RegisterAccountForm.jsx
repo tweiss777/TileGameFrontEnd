@@ -32,7 +32,9 @@ export default function RegisterAccountForm({handleClose}){
                 break;
             case 'confirm-password':
                 setConfirmPassword(event.target.value)
-                default:
+                break;
+
+            default:
                 break;
         }   
     }
