@@ -18,7 +18,7 @@ const Home = () => {
 
   const cards = buildCards();
   return (
-    <div className="App">
+    <div className="game">
       <div className="timer">
         {!timesOver && scored.length < 8 ? (
           <Timer setTimesOver={setTimesOver} />
