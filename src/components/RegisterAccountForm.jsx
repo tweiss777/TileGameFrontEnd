@@ -8,6 +8,7 @@ export default function RegisterAccountForm({handleClose}){
     const [password,setPassword] = useState('');
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
+    const [confirmPassword,setConfirmPassword] = useState('')
 
     const [hasErrors, setHasErrors] = useState(false);
 
@@ -29,7 +30,9 @@ export default function RegisterAccountForm({handleClose}){
             case 'password':
                 setPassword(event.target.value);
                 break;
-            default:
+            case 'confirm-password':
+                setConfirmPassword(event.target.value)
+                default:
                 break;
         }   
     }
@@ -60,6 +63,9 @@ export default function RegisterAccountForm({handleClose}){
                     <label>Last Name</label>
                     <input onChange={fieldOnChange} id='last-name' type='text' placeholder="last name" />
                     <label>Password</label>
+                    <label>Confirm Password</label>
+                    <input id='confirm-password' type='password' placeholder='password' onChange={fieldOnChange} />
+
                     <input onChange={fieldOnChange} id='password' type='password' placeholder="password" />
                     <button className="submit-btn" onClick={createAccount}>Create Account</button>
                 </div>
