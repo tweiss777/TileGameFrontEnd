@@ -28,10 +28,12 @@ const Home = () => {
           <div>
             <span className="win">You Won!! Your score is: {score} </span>
 
-            <div>
-              className="tryAgain" onClick={() => window.location.reload(false)}
-              > Play again?
-            </div>
+            <span
+              className="tryAgain"
+              onClick={() => window.location.reload(false)}>
+              {" "}
+              Play again?
+            </span>
           </div>
         ) : (
           <div></div>
@@ -43,8 +45,10 @@ const Home = () => {
             <div className="gameOver">You Lost!!</div>
             <img className="sad" src={sad} alt=":(" />
             <div
-              className="tryAgain" onClick={() => window.location.reload(false)}
-              > Try again
+              className="tryAgain"
+              onClick={() => window.location.reload(false)}>
+              {" "}
+              Try again
             </div>
           </div>
         ) : (
