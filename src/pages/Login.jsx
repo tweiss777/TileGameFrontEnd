@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
 import "../styles/Login.css";
-export default function Login() {
+export default function Login({ setIsAuth }) {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +16,7 @@ export default function Login() {
       return;
     }
     // need to authenticate user before navigating to page
+    setIsAuth(true);
     navigate("/home");
   }
 
@@ -48,12 +49,8 @@ export default function Login() {
           placeholder="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button className="but loginBut" onClick={handleLogin}>
-          Login
-        </button>
-        <button className="but accountBut" onClick={onClickCreateAccountButton}>
-          Create Account
-        </button>
+        <button onClick={handleLogin}>Login</button>
+        <button onClick={onClickCreateAccountButton}>Create Account</button>
       </div>
     </>
   );

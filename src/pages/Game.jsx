@@ -15,6 +15,8 @@ import sad from "../images/sad.png";
 const Home = () => {
   const [timesOver, setTimesOver] = useState(false);
   const [completed, setCompleted] = useState([]);
+  const [clicked, setClicked] = useState(0);
+  const score = (100 - clicked) * 20;
 
   const cards = buildCards();
   return (
@@ -24,10 +26,12 @@ const Home = () => {
           <Timer setTimesOver={setTimesOver} />
         ) : completed.length === 8 ? (
           <div>
-            <span className="win">You Won!! </span>
+            <span className="win">You Won!! Your score is: {score} </span>
+
             <span
               className="tryAgain"
               onClick={() => window.location.reload(false)}>
+              {" "}
               Play again?
             </span>
           </div>
@@ -43,6 +47,7 @@ const Home = () => {
             <div
               className="tryAgain"
               onClick={() => window.location.reload(false)}>
+              {" "}
               Try again
             </div>
           </div>
@@ -51,6 +56,8 @@ const Home = () => {
             cartas={cards}
             completed={completed}
             setCompleted={setCompleted}
+            clicked={clicked}
+            setClicked={setClicked}
           />
         )}
       </div>
