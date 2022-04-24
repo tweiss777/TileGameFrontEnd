@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Card from "../Card/Card";
-import "./Board.css";
+import Card from "./Card";
+import "../styles/Board.css";
 
 const Board = ({ cartas, completed, setCompleted, clicked, setClicked }) => {
   const [cards, setCards] = useState(cartas);

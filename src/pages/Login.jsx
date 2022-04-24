@@ -34,7 +34,7 @@ export default function Login({ setIsAuth }) {
         <RegisterAccountForm handleClose={onClickCreateAccountButton} />
       )}
 
-      <h1>Welcome to Tile Game!!!!</h1>
+      <h1>Welcome to Israel Tile Challenge!!!</h1>
       {errors && <p>One or more fields is missing</p>}
       <div className="login-container">
         <label>user name</label>

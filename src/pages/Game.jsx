@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import Board from "../components/Board/Board";
+import Board from "../components/Board";
 import Timer from "../components/Timer";
 import backImg from "../images/itc.png";
 import angular from "../images/angular.png";
