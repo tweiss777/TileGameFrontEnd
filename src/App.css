@@ -1,12 +1,13 @@
-
-.App {
+.App-Game {
   text-align: center;
-  
-}
-.game {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.App{
+  align-items: center;
+  text-align: center;
+
 }
 h1 {
   margin: 6rem;
@@ -28,10 +29,8 @@ h1 {
 }
 .tryAgain {
   margin-top: 2rem;
-  margin-left:1rem;
   font-size: 26px;
   font-weight: 700;
-  color:rgb(37, 9, 9);
   cursor: pointer;
 }
 .win {
@@ -43,4 +42,3 @@ h1 {
   height:26rem;
   width: 22rem;
 }
-
