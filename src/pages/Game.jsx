@@ -1,4 +1,6 @@
 import { React, useState } from "react";
+import { addScore } from "../services/server.js";
+
 import Board from "../components/Board";
 import Timer from "../components/Timer";
 import backImg from "../images/itc.png";
@@ -12,11 +14,15 @@ import js from "../images/js.png";
 import mysql from "../images/mysql.png";
 import sad from "../images/sad.png";
 
+
 const Home = () => {
   const [timesOver, setTimesOver] = useState(false);
   const [completed, setCompleted] = useState([]);
   const [clicked, setClicked] = useState(0);
-  const score = (100 - clicked) * 20;
+  const [score,setScore]= useState(0)
+  
+  
+  
 
   const cards = buildCards();
   return (

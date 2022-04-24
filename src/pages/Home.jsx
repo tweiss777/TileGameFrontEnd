@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-      <h1>Welcome User</h1>
+      <h1>Welcome name</h1>
       <h1>
         Your score is: xxx <span> High Score: yyy</span>
       </h1>

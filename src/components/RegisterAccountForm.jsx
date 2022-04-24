@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "../styles/CreateAccount.css";
+import { signUp } from "../services/server.js";
 
-export default function RegisterAccountForm({ handleClose }) {
+
+function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [hasErrors, setHasErrors] = useState(false);
 
   function closeForm() {
@@ -37,8 +38,14 @@ export default function RegisterAccountForm({ handleClose }) {
     }
   }
 
-  function createAccount() {
+  async function createAccount() {
     setHasErrors(false);
+    const data = await signUp(userName, firstName,password)
+    console.log(data)
+    setIsAuth(true);
+    closeForm();
+    handleLogIn();
+
     // any client side errors
     if (!userName || !firstName || !lastName || !password) {
       setHasErrors(true);
@@ -79,14 +86,14 @@ export default function RegisterAccountForm({ handleClose }) {
           <input
             onChange={fieldOnChange}
             id="password"
-            type="password"
+            type="text"
             placeholder="password"
           />
 
           <label>Confirm Password</label>
           <input
             id="confirm-password"
-            type="password"
+            type="text"
             placeholder="password"
             onChange={fieldOnChange}
           />
@@ -99,3 +106,4 @@ export default function RegisterAccountForm({ handleClose }) {
     </>
   );
 }
+export default RegisterAccountForm;

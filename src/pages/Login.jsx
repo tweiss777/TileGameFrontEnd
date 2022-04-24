@@ -1,7 +1,9 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
 import "../styles/Login.css";
+import { login } from "../services/server.js";
 export default function Login({ setIsAuth }) {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
@@ -9,13 +11,14 @@ export default function Login({ setIsAuth }) {
   const [errors, setErrors] = useState(false);
   const [showNewUserForm, setShowNewUserForm] = useState(false);
 
-  function handleLogin() {
+  async function handleLogin() {
     setErrors(false);
     if (!username || !password) {
       setErrors(true);
       return;
     }
     // need to authenticate user before navigating to page
+    // const data = await login(username, password);
     setIsAuth(true);
     navigate("/home");
   }
@@ -31,7 +34,11 @@ export default function Login({ setIsAuth }) {
   return (
     <>
       {showNewUserForm && (
-        <RegisterAccountForm handleClose={onClickCreateAccountButton} />
+        <RegisterAccountForm
+          handleClose={onClickCreateAccountButton}
+          setIsAuth={setIsAuth}
+          handleLogin={handleLogin}
+        />
       )}
 
       <h1>Welcome to Israel Tile Challenge!!!</h1>
@@ -45,7 +52,7 @@ export default function Login({ setIsAuth }) {
         />
         <label>password</label>
         <input
-          type="password"
+          type="text"
           placeholder="password"
           onChange={(event) => setPassword(event.target.value)}
         />
