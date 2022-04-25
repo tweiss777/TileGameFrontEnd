@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { authenticateUser } from "../services/server";
+import { authenticateUser,signUp } from "../services/server";
 
 
 
@@ -13,8 +13,8 @@ export default function AuthenticationProvider({children}){
     const [errors, setErrors] = useState(false);
 
 
-    function createAccount({email,firstname,lastname,password,confirmPassword}){
-        console.log("Creating account")
+    async function createAccount({email,firstname,lastname,password,confirmPassword}){
+        
         // here we can throw an error and create acccount form can catch 
     }
 
