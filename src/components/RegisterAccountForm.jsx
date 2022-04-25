@@ -45,7 +45,6 @@ export default function RegisterAccountForm({ handleClose }) {
       setHasErrors(true);
       return;
     }
-<<<<<<< HEAD
     createAccount({
       email: userName,
       firstname: firstName,
@@ -107,50 +106,4 @@ export default function RegisterAccountForm({ handleClose }) {
       </div>
     </>
   );
-=======
-
-
-    function handleCreateAccount(){
-        setHasErrors(false)
-        // any client side errors
-        if(!userName || !firstName || !lastName || !password){
-            setHasErrors(true)
-            return
-        }
-        createAccount({email:userName,firstname:firstName,lastname:lastName,password:password,confirmPassword:confirmPassword})
-
-
-    }
-
-
-    return(
-        <>
-            {hasErrors && <p>One or more fields is missing...</p>}
-            <div className='form-background'>
-                <div className="form-container">
-                    <span className='close-icon' onClick={closeForm} >x</span>
-                    <label>Email</label>
-                    <input onChange={fieldOnChange} id='email' type='text' placeholder="email" />
-                    <label>First Name</label>
-                    <input onChange={fieldOnChange} id='first-name' type='text' placeholder="first name" />
-                    <label>Last Name</label>
-                    <input onChange={fieldOnChange} id='last-name' type='text' placeholder="last name" />
-                    <label>Password</label>
-                    <input onChange={fieldOnChange} id='password' type='password' placeholder="password" />
-                    
-                    <label>Confirm Password</label>
-                    <input id='confirm-password' type='password' placeholder='password' onChange={fieldOnChange} />
-
-                    
-                    <button className="submit-btn" onClick={handleCreateAccount}>Create Account</button>
-                </div>
-
-
-            </div>
-        </>
-    )
-
-
-
->>>>>>> 82c2fde7de87a5f979f7657f19657091ca3eb738
 }
