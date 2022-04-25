@@ -11,6 +11,7 @@ export const Authentication = createContext();
 export default function AuthenticationProvider({children}){
     const navigate = useNavigate();
     const [errors, setErrors] = useState(false);
+    const [isAuthenticated,setIsAuthenticated] = useState(false)
 
 
     async function createAccount({email,firstname,lastname,password,confirmPassword}){
@@ -18,6 +19,7 @@ export default function AuthenticationProvider({children}){
             const token = await signUp(email,firstname,lastname,password,confirmPassword);    
             navigate('/home')
             localStorage.setItem('token',token)
+            setIsAuthenticated(true)
 
         }
         catch(error){
@@ -37,6 +39,8 @@ export default function AuthenticationProvider({children}){
             const token = await authenticateUser(username,password)
             // store the token in a cookie
             setAuthHeader(token)
+            localStorage.setItem('token',token)
+            setIsAuthenticated(true)
             navigate('/home')
             
         }
@@ -49,13 +53,14 @@ export default function AuthenticationProvider({children}){
 
     function logout(){
         localStorage.removeItem('token')
+        setIsAuthenticated(false)
         navigate('/')
     }
 
 
     return (
         <>
-            <Authentication.Provider value={{login:login,logout,createAccount,errors}}>
+            <Authentication.Provider value={{login:login,logout,createAccount,errors,isAuthenticated}}>
                 {children}
             </Authentication.Provider>
         </>
