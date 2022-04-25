@@ -13,7 +13,6 @@ import react from "../images/react.png";
 import js from "../images/js.png";
 import mysql from "../images/mysql.png";
 import sad from "../images/sad.png";
-import {useAuthentiation} from '../hooks/useAuthentication'
 
 const Home = () => {
   const [timesOver, setTimesOver] = useState(false);
@@ -23,8 +22,7 @@ const Home = () => {
   const score = (100 - clicked) * 20;
   const cards = buildCards();
 
-  const {email} = useAuthentiation()
-  completed.length === 8 && addScore({score:score,email:email,date: new Date().toISOString().slice(0, 19).replace('T', ' ')});
+  completed.length === 8 && addScore({score:score,email:localStorage.getItem('email'),date: new Date().toISOString().slice(0, 19).replace('T', ' ')});
 
   return (
     <div className="App-Game">
@@ -33,7 +31,7 @@ const Home = () => {
           <Timer setTimesOver={setTimesOver} />
         ) : completed.length === 8 ? (
           <div>
-            <span className="win">You Won!! Your score is: {score} </span>
+            <span className="win"> You Won!! Your score is: {score} </span>
 
             <span
               className="tryAgain"
