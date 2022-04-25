@@ -1,32 +1,12 @@
 import { useState } from "react";
-
-import { useNavigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
+import { useAuthentiation } from "../hooks/useAuthentication";
 import "../styles/Login.css";
-import { login } from "../services/server.js";
-export default function Login({ setIsAuth }) {
-  const navigate = useNavigate();
+export default function Login() {
+  const { login, errors } = useAuthentiation();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(false);
   const [showNewUserForm, setShowNewUserForm] = useState(false);
-
-  async function handleLogin() {
-    setErrors(false);
-    if (!username || !password) {
-      setErrors(true);
-      return;
-    }
-    // need to authenticate user before navigating to page
-    try {
-      const data = await login(username, password);
-      console.log(data.response);
-      setIsAuth(true);
-      navigate("/home");
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
 
   function onClickCreateAccountButton() {
     if (!showNewUserForm) {
@@ -36,18 +16,22 @@ export default function Login({ setIsAuth }) {
     }
   }
 
+  function handleLogin() {
+    login(username, password);
+  }
+
   return (
     <>
       {showNewUserForm && (
         <RegisterAccountForm
           handleClose={onClickCreateAccountButton}
-          setIsAuth={setIsAuth}
-          handleLogin={handleLogin}
+          setIsAuth={errors}
+          handleLogin={login}
         />
       )}
 
-      <h1>Welcome to Israel Tile Challenge!!!</h1>
-      {errors && <p>One or more fields is missing</p>}
+      <h1>Welcome to Tile Game!!!!</h1>
+      {errors && <p>invalid username or password</p>}
       <div className="login-container">
         <label>user name</label>
         <input
@@ -57,7 +41,7 @@ export default function Login({ setIsAuth }) {
         />
         <label>password</label>
         <input
-          type="text"
+          type="password"
           placeholder="password"
           onChange={(event) => setPassword(event.target.value)}
         />

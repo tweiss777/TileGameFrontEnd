@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useAuthentiation } from "../hooks/useAuthentication";
 import "../styles/CreateAccount.css";
-import { signUp } from "../services/server.js";
 
-function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
+export default function RegisterAccountForm({ handleClose }) {
+  const { createAccount } = useAuthentiation();
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -37,23 +38,20 @@ function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
     }
   }
 
-  async function createAccount() {
+  function handleCreateAccount() {
     setHasErrors(false);
-    try {
-      const data = await signUp(userName, firstName, password);
-      console.log(data);
-      setIsAuth(true);
-      closeForm();
-      handleLogIn();
-    } catch (err) {
-      console.log(err.message);
-    }
-
     // any client side errors
     if (!userName || !firstName || !lastName || !password) {
       setHasErrors(true);
       return;
     }
+    createAccount({
+      email: userName,
+      firstname: firstName,
+      lastname: lastName,
+      password: password,
+      confirmPassword: confirmPassword,
+    });
   }
 
   return (
@@ -86,22 +84,21 @@ function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
             placeholder="last name"
           />
           <label>Password</label>
-          <input
-            onChange={fieldOnChange}
-            id="password"
-            type="text"
-            placeholder="password"
-          />
-
           <label>Confirm Password</label>
           <input
             id="confirm-password"
-            type="text"
+            type="password"
             placeholder="password"
             onChange={fieldOnChange}
           />
 
-          <button className="submit-btn" onClick={createAccount}>
+          <input
+            onChange={fieldOnChange}
+            id="password"
+            type="password"
+            placeholder="password"
+          />
+          <button className="submit-btn" onClick={handleCreateAccount}>
             Create Account
           </button>
         </div>
@@ -109,4 +106,3 @@ function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
     </>
   );
 }
-export default RegisterAccountForm;
