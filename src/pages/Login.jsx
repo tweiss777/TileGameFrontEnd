@@ -1,14 +1,11 @@
 import { useState } from "react";
-
-import { useNavigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
+import { useAuthentiation } from "../hooks/useAuthentication";
 import "../styles/Login.css";
-import { login } from "../services/server.js";
-export default function Login({ setIsAuth }) {
-  const navigate = useNavigate();
+export default function Login() {
+  const {login,errors} = useAuthentiation();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(false);
   const [showNewUserForm, setShowNewUserForm] = useState(false);
 
   async function handleLogin() {
@@ -41,8 +38,13 @@ export default function Login({ setIsAuth }) {
         />
       )}
 
+<<<<<<< HEAD
       <h1>Welcome to Israel Tile Challenge!!!</h1>
       {errors && <p>One or more fields is missing</p>}
+=======
+      <h1>Welcome to Tile Game!!!!</h1>
+      {errors && <p>invalid username or password</p>}
+>>>>>>> authenticationContext
       <div className="login-container">
         <label>user name</label>
         <input
