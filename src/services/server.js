@@ -6,8 +6,10 @@ const api = axios.create({
 function setAuthHeader(token) {
   api.defaults.headers["Authorization"] = `Bearer ${token}`;
 }
-async function signUp(email, firstName,password) {
-  const response = await api.post("/user/sigup", {email, firstName, password})
+async function signUp(email, firstName,lastName, password,confirmPassword) {
+  const response = await api.post("/user/signup", {email:email, firstName:firstName, lastName:lastName, password: password,confirmPassword:confirmPassword})
+  console.log(response)
+  return response.data;
 }
 
 async function authenticateUser(username, password) {
