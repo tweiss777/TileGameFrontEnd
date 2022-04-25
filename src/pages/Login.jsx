@@ -38,13 +38,8 @@ export default function Login() {
         />
       )}
 
-<<<<<<< HEAD
-      <h1>Welcome to Israel Tile Challenge!!!</h1>
-      {errors && <p>One or more fields is missing</p>}
-=======
       <h1>Welcome to Tile Game!!!!</h1>
       {errors && <p>invalid username or password</p>}
->>>>>>> authenticationContext
       <div className="login-container">
         <label>user name</label>
         <input
