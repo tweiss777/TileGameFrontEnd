@@ -2,7 +2,7 @@ import { createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { authenticateUser,setAuthHeader,signUp } from "../services/server";
-
+import { fetchHighScore, fetchScore} from '../services/server'
 
 
 export const Authentication = createContext();
@@ -14,7 +14,8 @@ export default function AuthenticationProvider({children}){
     const [errors, setErrors] = useState(false);
     const [isAuthenticated,setIsAuthenticated] = useState(false)
     const [email,setEmail] = useState('')
-    
+    const [highScore,setHighScore] = useState(0);
+    const [lastScore,setLastScore] = useState(0);
     useEffect(() => {
         console.log("use effect")
         if(localStorage.getItem('token')){
@@ -28,6 +29,7 @@ export default function AuthenticationProvider({children}){
             const token = await signUp(email,firstname,lastname,password,confirmPassword);    
             navigate('/home')
             localStorage.setItem('token',token)
+            localStorage.setItem('email')
             setEmail(email)
             setIsAuthenticated(true)
 
@@ -51,7 +53,11 @@ export default function AuthenticationProvider({children}){
             setAuthHeader(token)
             setEmail(username)
             localStorage.setItem('token',token)
+            localStorage.setItem('email',email)
             setIsAuthenticated(true)
+            setHighScore(await fetchHighScore(email))
+            setLastScore(await fetchScore(email));
+            
             navigate('/home')
             
         }
@@ -64,6 +70,7 @@ export default function AuthenticationProvider({children}){
 
     function logout(){
         localStorage.removeItem('token')
+        localStorage.removeItem('email')
         setIsAuthenticated(false)
         navigate('/')
     }
@@ -71,7 +78,7 @@ export default function AuthenticationProvider({children}){
 
     return (
         <>
-            <Authentication.Provider value={{login:login,logout,createAccount,errors,isAuthenticated,email}}>
+            <Authentication.Provider value={{login:login,logout,createAccount,errors,isAuthenticated,email,highScore,lastScore}}>
                 {children}
             </Authentication.Provider>
         </>

@@ -25,13 +25,13 @@ async function authenticateUser(username, password) {
 }
 
 async function fetchScore(email) {
-  const response = await api.get(`/getlastscore/${email}`);
-  return response.data;
+  const response = await api.get(`/game/getlastscore/${email}`);
+  return response.data.score;
 }
 
 async function fetchHighScore(email) {
-  const response = await api.get(`/gethighscore/${email}`);
-  return response.data;
+  const response = await api.get(`/game/gethighscore/${email}`);
+  return response.data.score;
 }
 
 async function addScore(score) {
@@ -41,10 +41,3 @@ async function addScore(score) {
 
 export { authenticateUser, fetchScore, addScore, signUp,fetchHighScore, setAuthHeader };
 
-// function convertServerNotes(notes) {
-//   return notes.map((note) => serverNote2AppNote(note));
-// }
-
-// function serverScore2AppScore(score) {
-//   return { ...score, date: new Date(score.score_date) };
-// }
