@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { authenitcateUser} from "../services/authentication";
 
 
 export const Authentication = createContext();
@@ -17,14 +18,22 @@ export default function AuthenticationProvider({children}){
     }
 
 
-    function login(username,password){
+    async function login(username,password){
         setErrors(false);
         if (!username || !password) {
         setErrors(true);
         return;
     }
-        console.log("logging in")
-        navigate('/home')
+        try{
+            const token = await authenitcateUser(username,password)
+            // store the token in a cookie
+            navigate('/home')
+
+        }
+        catch(error){
+            
+            setErrors(true)
+        }
         
     }
 

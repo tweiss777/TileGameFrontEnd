@@ -28,7 +28,7 @@ export default function Login() {
       )}
 
       <h1>Welcome to Tile Game!!!!</h1>
-      {errors && <p>One or more fields is missing</p>}
+      {errors && <p>invalid username or password</p>}
       <div className="login-container">
         <label>user name</label>
         <input
