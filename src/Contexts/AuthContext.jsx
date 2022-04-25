@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { authenticateUser,signUp } from "../services/server";
+import { authenticateUser,setAuthHeader,signUp } from "../services/server";
 
 
 
@@ -14,7 +14,15 @@ export default function AuthenticationProvider({children}){
 
 
     async function createAccount({email,firstname,lastname,password,confirmPassword}){
-        
+        try{
+            const token = await signUp(email,firstname,lastname,password,confirmPassword);    
+            navigate('/home')
+            localStorage.setItem('token',token)
+
+        }
+        catch(error){
+            console.error(error)
+        }
         // here we can throw an error and create acccount form can catch 
     }
 
@@ -28,8 +36,9 @@ export default function AuthenticationProvider({children}){
         try{
             const token = await authenticateUser(username,password)
             // store the token in a cookie
+            setAuthHeader(token)
             navigate('/home')
-
+            
         }
         catch(error){
 
@@ -39,7 +48,8 @@ export default function AuthenticationProvider({children}){
     }
 
     function logout(){
-        console.log("logging out")
+        localStorage.removeItem('token')
+        navigate('/')
     }
 
 
