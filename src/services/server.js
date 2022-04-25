@@ -10,7 +10,7 @@ async function signUp(email, firstName,password) {
   const response = await api.post("/user/sigup", {email, firstName, password})
 }
 
-async function login(username, password) {
+async function authenticateUser(username, password) {
   const response = await api.post("/user/login", { username, password });
   console.log(response.status);
   console.log(response.data);
@@ -32,7 +32,7 @@ async function addScore(score) {
   return response.data;
 }
 
-export { login, fetchScore, addScore, signUp,fetchHighScore, setAuthHeader };
+export { authenticateUser, fetchScore, addScore, signUp,fetchHighScore, setAuthHeader };
 
 // function convertServerNotes(notes) {
 //   return notes.map((note) => serverNote2AppNote(note));

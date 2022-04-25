@@ -82,4 +82,3 @@ export default function RegisterAccountForm({handleClose}){
 
 
 }
-export default RegisterAccountForm;

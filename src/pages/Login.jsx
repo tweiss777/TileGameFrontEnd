@@ -8,17 +8,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showNewUserForm, setShowNewUserForm] = useState(false);
 
-  async function handleLogin() {
-    setErrors(false);
-    if (!username || !password) {
-      setErrors(true);
-      return;
-    }
-    // need to authenticate user before navigating to page
-    // const data = await login(username, password);
-    setIsAuth(true);
-    navigate("/home");
-  }
 
   function onClickCreateAccountButton() {
     if (!showNewUserForm) {
@@ -28,13 +17,18 @@ export default function Login() {
     }
   }
 
+
+  function handleLogin(){
+    login(username,password)
+  }
+
   return (
     <>
       {showNewUserForm && (
         <RegisterAccountForm
           handleClose={onClickCreateAccountButton}
-          setIsAuth={setIsAuth}
-          handleLogin={handleLogin}
+          setIsAuth={errors}
+          handleLogin={login}
         />
       )}
 
@@ -49,7 +43,7 @@ export default function Login() {
         />
         <label>password</label>
         <input
-          type="text"
+          type="password"
           placeholder="password"
           onChange={(event) => setPassword(event.target.value)}
         />

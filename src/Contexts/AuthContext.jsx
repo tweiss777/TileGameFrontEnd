@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { authenitcateUser} from "../services/authentication";
+import { authenticateUser } from "../services/server";
 
 
 
@@ -26,7 +26,7 @@ export default function AuthenticationProvider({children}){
         return;
     }
         try{
-            const token = await authenitcateUser(username,password)
+            const token = await authenticateUser(username,password)
             // store the token in a cookie
             navigate('/home')
 
