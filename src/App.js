@@ -12,14 +12,24 @@ function App() {
       <BrowserRouter>
         <AuthenticationProvider>
           <Routes>
-            <ProtectedRoute
-              Route
+            <Route
               path="/home"
-              element={<Home />}></ProtectedRoute>
-            <ProtectedRoute
-              Route
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               path="/game"
-              element={<Game />}></ProtectedRoute>
+              element={
+                <ProtectedRoute>
+                  <Game />{" "}
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="/" element={<Login />} />
           </Routes>
         </AuthenticationProvider>
