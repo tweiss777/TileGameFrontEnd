@@ -10,6 +10,7 @@ export default function RegisterAccountForm({ handleClose }) {
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [hasErrors, setHasErrors] = useState(false);
+  const [errorMessages,setErrorMessages] = useState([[]])
 
   function closeForm() {
     handleClose();
@@ -38,25 +39,25 @@ export default function RegisterAccountForm({ handleClose }) {
     }
   }
 
-  function handleCreateAccount() {
+  async function handleCreateAccount() {
     setHasErrors(false);
+    setErrorMessages([])
     // any client side errors
-    if (!userName || !firstName || !lastName || !password) {
-      setHasErrors(true);
-      return;
-    }
-    createAccount({
+    setErrorMessages(await createAccount({
       email: userName,
       firstname: firstName,
       lastname: lastName,
       password: password,
       confirmPassword: confirmPassword,
-    });
+    }));
+    if(errorMessages.length > 0){
+      setHasErrors(true)
+    }
   }
 
   return (
     <>
-      {hasErrors && <p>One or more fields is missing...</p>}
+      {hasErrors && <ul>{errorMessages.map((message,index) => <li key={index}>{message}</li> )}</ul>}
       <div className="form-background">
         <div className="form-container">
           <span className="close-icon" onClick={closeForm}>

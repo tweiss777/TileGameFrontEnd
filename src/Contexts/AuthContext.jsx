@@ -24,7 +24,11 @@ export default function AuthenticationProvider({children}){
     console.log(isAuthenticated)
     async function createAccount({email,firstname,lastname,password,confirmPassword}){
         try{
-            const token = await signUp(email,firstname,lastname,password,confirmPassword);    
+            const token = await signUp(email,firstname,lastname,password,confirmPassword);
+            if(typeof token !== 'string'){
+                return token
+
+            }    
             navigate('/home')
             localStorage.setItem('token',token)
             localStorage.setItem('email',email)
@@ -33,6 +37,7 @@ export default function AuthenticationProvider({children}){
 
         }
         catch(error){
+            
             console.error(error)
         }
         // here we can throw an error and create acccount form can catch 

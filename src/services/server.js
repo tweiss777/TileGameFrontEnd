@@ -7,9 +7,16 @@ function setAuthHeader(token) {
   api.defaults.headers["Authorization"] = `Bearer ${token}`;
 }
 async function signUp(email, firstName,lastName, password,confirmPassword) {
-  const response = await api.post("/user/signup", {email:email, firstName:firstName, lastName:lastName, password: password,confirmPassword:confirmPassword})
+  try{
+    const response = await api.post("/user/signup", {email:email, firstName:firstName, lastName:lastName, password: password,confirmPassword:confirmPassword})
   console.log(response)
   return response.data;
+  }
+  catch(err){
+    console.log(err)
+    return err.response.data
+  }
+  
 }
 
 async function authenticateUser(username, password) {
