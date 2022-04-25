@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import RegisterAccountForm from "../components/RegisterAccountForm";
 import { useAuthentiation } from "../hooks/useAuthentication";
 import "../styles/Login.css";
 export default function Login() {
-  const { login, errors } = useAuthentiation();
+  const { login, errors,isAuthenticated } = useAuthentiation();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showNewUserForm, setShowNewUserForm] = useState(false);
+
 
   function onClickCreateAccountButton() {
     if (!showNewUserForm) {
@@ -21,7 +23,9 @@ export default function Login() {
   }
 
   return (
+  
     <>
+      {isAuthenticated && <Navigate to="/home" replace />}
       {showNewUserForm && (
         <RegisterAccountForm
           handleClose={onClickCreateAccountButton}

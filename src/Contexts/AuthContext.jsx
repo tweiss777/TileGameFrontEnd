@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { authenticateUser,setAuthHeader,signUp } from "../services/server";
@@ -9,16 +9,26 @@ export const Authentication = createContext();
 
 
 export default function AuthenticationProvider({children}){
+    
     const navigate = useNavigate();
     const [errors, setErrors] = useState(false);
     const [isAuthenticated,setIsAuthenticated] = useState(false)
-
-
+    const [email,setEmail] = useState('')
+    
+    useEffect(() => {
+        console.log("use effect")
+        if(localStorage.getItem('token')){
+            setIsAuthenticated(true)
+        }
+    },[])
+    
+    console.log(isAuthenticated)
     async function createAccount({email,firstname,lastname,password,confirmPassword}){
         try{
             const token = await signUp(email,firstname,lastname,password,confirmPassword);    
             navigate('/home')
             localStorage.setItem('token',token)
+            setEmail(email)
             setIsAuthenticated(true)
 
         }
@@ -39,6 +49,7 @@ export default function AuthenticationProvider({children}){
             const token = await authenticateUser(username,password)
             // store the token in a cookie
             setAuthHeader(token)
+            setEmail(username)
             localStorage.setItem('token',token)
             setIsAuthenticated(true)
             navigate('/home')
@@ -60,7 +71,7 @@ export default function AuthenticationProvider({children}){
 
     return (
         <>
-            <Authentication.Provider value={{login:login,logout,createAccount,errors,isAuthenticated}}>
+            <Authentication.Provider value={{login:login,logout,createAccount,errors,isAuthenticated,email}}>
                 {children}
             </Authentication.Provider>
         </>

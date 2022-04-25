@@ -13,10 +13,15 @@ async function signUp(email, firstName,lastName, password,confirmPassword) {
 }
 
 async function authenticateUser(username, password) {
-  const response = await api.post("/user/login", { username, password });
-  console.log(response.status);
-  console.log(response.data);
-  return response.data;
+  try{
+    const response = await api.post("/user/login", { username, password });
+    console.log(response.status);
+    console.log(response.data);
+    return response.data;  
+  }
+  catch(error){
+    throw Error(error.response.message)
+  }
 }
 
 async function fetchScore(email) {
