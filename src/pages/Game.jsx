@@ -19,7 +19,7 @@ const Home = () => {
   const [completed, setCompleted] = useState([]);
   const [clicked, setClicked] = useState(0);
   const score = (100 - clicked) * 20;
-  completed.length === 2 && addScore(score);
+  completed.length === 8 && addScore(score);
 
   const cards = buildCards();
 

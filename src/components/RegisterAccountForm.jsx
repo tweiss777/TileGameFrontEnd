@@ -84,6 +84,13 @@ export default function RegisterAccountForm({ handleClose }) {
             placeholder="last name"
           />
           <label>Password</label>
+          <input
+            onChange={fieldOnChange}
+            id="password"
+            type="password"
+            placeholder="password"
+          />
+
           <label>Confirm Password</label>
           <input
             id="confirm-password"
@@ -92,12 +99,6 @@ export default function RegisterAccountForm({ handleClose }) {
             onChange={fieldOnChange}
           />
 
-          <input
-            onChange={fieldOnChange}
-            id="password"
-            type="password"
-            placeholder="password"
-          />
           <button className="submit-btn" onClick={handleCreateAccount}>
             Create Account
           </button>
