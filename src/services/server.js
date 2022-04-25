@@ -6,8 +6,10 @@ const api = axios.create({
 function setAuthHeader(token) {
   api.defaults.headers["Authorization"] = `Bearer ${token}`;
 }
+
 async function signUp(email, firstName,password) {
-  const response = await api.post("/user/sigup", {email, firstName, password})
+  const response = await api.post("/user/signup", {email, firstName, password})
+  return response.data
 }
 
 async function login(username, password) {
@@ -18,26 +20,18 @@ async function login(username, password) {
 }
 
 async function fetchScore(email) {
-  const response = await api.get(`/getlastscore/:${email}`);
+  const response = await api.get(`game/getlastscore/:${email}`);
   return response.data;
 }
 
 async function fetchHighScore(email) {
-  const response = await api.get(`/gethighscore/:${email}`);
+  const response = await api.get(`game/gethighscore/:${email}`);
   return response.data;
 }
 
 async function addScore(score) {
   const response = await api.post("game/addscore", score);
-  return response.data;
 }
 
 export { login, fetchScore, addScore, signUp,fetchHighScore, setAuthHeader };
 
-// function convertServerNotes(notes) {
-//   return notes.map((note) => serverNote2AppNote(note));
-// }
-
-// function serverScore2AppScore(score) {
-//   return { ...score, date: new Date(score.score_date) };
-// }

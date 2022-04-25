@@ -14,17 +14,15 @@ import js from "../images/js.png";
 import mysql from "../images/mysql.png";
 import sad from "../images/sad.png";
 
-
 const Home = () => {
   const [timesOver, setTimesOver] = useState(false);
   const [completed, setCompleted] = useState([]);
   const [clicked, setClicked] = useState(0);
-  const [score,setScore]= useState(0)
-  
-  
-  
+  const score = (100 - clicked) * 20;
+  completed.length === 2 && addScore(score);
 
   const cards = buildCards();
+
   return (
     <div className="App-Game">
       <div className="timer">

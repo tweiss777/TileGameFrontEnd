@@ -18,9 +18,14 @@ export default function Login({ setIsAuth }) {
       return;
     }
     // need to authenticate user before navigating to page
-    // const data = await login(username, password);
-    setIsAuth(true);
-    navigate("/home");
+    try {
+      const data = await login(username, password);
+      console.log(data.response);
+      setIsAuth(true);
+      navigate("/home");
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   function onClickCreateAccountButton() {

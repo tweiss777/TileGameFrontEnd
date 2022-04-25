@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../styles/CreateAccount.css";
 import { signUp } from "../services/server.js";
 
-
 function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,11 +39,15 @@ function RegisterAccountForm({ handleClose, setIsAuth, handleLogIn }) {
 
   async function createAccount() {
     setHasErrors(false);
-    const data = await signUp(userName, firstName,password)
-    console.log(data)
-    setIsAuth(true);
-    closeForm();
-    handleLogIn();
+    try {
+      const data = await signUp(userName, firstName, password);
+      console.log(data);
+      setIsAuth(true);
+      closeForm();
+      handleLogIn();
+    } catch (err) {
+      console.log(err.message);
+    }
 
     // any client side errors
     if (!userName || !firstName || !lastName || !password) {
