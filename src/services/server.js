@@ -25,12 +25,12 @@ async function authenticateUser(username, password) {
 }
 
 async function fetchScore(email) {
-  const response = await api.get(`/getlastscore/:${email}`);
+  const response = await api.get(`/getlastscore/${email}`);
   return response.data;
 }
 
 async function fetchHighScore(email) {
-  const response = await api.get(`/gethighscore/:${email}`);
+  const response = await api.get(`/gethighscore/${email}`);
   return response.data;
 }
 

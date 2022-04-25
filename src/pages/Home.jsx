@@ -9,7 +9,6 @@ const Home = () => {
   let highScore = 0;
   let lastScore = 0;
   const {email} = useAuthentiation();
-  const token = localStorage.getItem('token');
 
 
   // useEffect(async () => {
@@ -21,7 +20,7 @@ const Home = () => {
     <div>
       <h1>Welcome</h1>
       <h1>
-        Your last score is:  <span> High Score: 1800</span>
+        Your last score is: {lastScore} <span> High Score: {highScore}</span>
       </h1>
       <Link to="/game">
         <b>Start Game</b>
