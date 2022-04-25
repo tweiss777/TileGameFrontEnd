@@ -4,7 +4,7 @@ import { useAuthentiation } from "../hooks/useAuthentication";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuthentiation();
-  if (isAuthenticated === true) {
+  if (isAuthenticated === false) {
     //temporary
     return <Navigate to="/" replace />;
   }
